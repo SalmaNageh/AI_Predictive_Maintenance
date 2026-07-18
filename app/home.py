@@ -1,42 +1,25 @@
-import os
 import sys
 from pathlib import Path
-import streamlit as st
-
-st.write("Current Working Directory:", os.getcwd())
-st.write("Current File:", __file__)
-st.write("Files in cwd:", os.listdir(os.getcwd()))
 
 ROOT = Path(__file__).resolve().parents[1]
-st.write("ROOT =", ROOT)
-st.write("ROOT exists =", ROOT.exists())
-st.write("ROOT files =", os.listdir(ROOT))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-sys.path.insert(0, str(ROOT))
+import streamlit as st
 
-st.write(sys.path[:5])
+from application.auth.service import AuthService
+from utils.styles import inject_global_css
+
+
 st.set_page_config(
     page_title="AI Predictive Maintenance",
     page_icon="🔧",
     layout="centered"
 )
-from utils.styles import inject_global_css
 
 inject_global_css()
 
-import traceback
-
-try:
-    from application.auth.service import AuthService
-    st.success("✅ AuthService imported successfully")
-except Exception:
-    st.code(traceback.format_exc())
-    st.stop()
-
 auth = AuthService()
-
-auth = AuthService()
-
 if "user" not in st.session_state:
     st.session_state.user = None
 
