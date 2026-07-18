@@ -20,6 +20,7 @@ st.set_page_config(
     page_icon="🔧",
     layout="centered"
 )
+from utils.styles import inject_global_css
 
 inject_global_css()
 
