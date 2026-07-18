@@ -24,14 +24,10 @@ from utils.styles import inject_global_css
 
 inject_global_css()
 
-import traceback
-
 try:
-    auth = AuthService()
-    st.success("Auth OK")
-except Exception:
-    st.code(traceback.format_exc())
-    st.stop()
+    from application.auth.service import AuthService
+except:
+    pass
 
 auth = AuthService()
 
