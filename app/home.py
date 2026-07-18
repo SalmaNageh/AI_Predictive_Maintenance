@@ -1,9 +1,15 @@
-import streamlit as st
 import sys
 from pathlib import Path
-from utils.path_setup import *
-from utils.styles import inject_global_css
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+import streamlit as st
+
 from application.auth.service import AuthService
+from utils.styles import inject_global_css
+
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.append(str(ROOT))
