@@ -1,19 +1,20 @@
+import os
 import sys
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
 import streamlit as st
 
-from application.auth.service import AuthService
-from utils.styles import inject_global_css
-
+st.write("Current Working Directory:", os.getcwd())
+st.write("Current File:", __file__)
+st.write("Files in cwd:", os.listdir(os.getcwd()))
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.append(str(ROOT))
+st.write("ROOT =", ROOT)
+st.write("ROOT exists =", ROOT.exists())
+st.write("ROOT files =", os.listdir(ROOT))
 
+sys.path.insert(0, str(ROOT))
+
+st.write(sys.path[:5])
 st.set_page_config(
     page_title="AI Predictive Maintenance",
     page_icon="🔧",
